@@ -14,6 +14,7 @@ public class FacebookLogin {
 		System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		// Maximize browser
+		//..
 		driver.manage().window().maximize();
 		// default wait is 0
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
