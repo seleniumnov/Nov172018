@@ -1,14 +1,14 @@
 package Anusha;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+
 public class freeCRM {
 
-	public static void main(String[] args) throws Throwable {
+	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
 		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
@@ -32,8 +32,7 @@ public class freeCRM {
 		driver.findElement(By.xpath("//input[@name = 'agreeTerms']")).click();
 		//driver.findElement(By.xpath("//input[contains(text() ,'SUBMIT')]")).click();
 		driver.findElement(By.xpath("//button[@name ='submitButton']")).click();
+
 	}
-	
-	
 
 }
