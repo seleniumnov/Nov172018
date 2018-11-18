@@ -25,6 +25,17 @@ public class Login {
 		
 		driver.findElement(By.name("submit")).click();
 		
+		WebElement home = driver.findElement(By.xpath("//div[@class='box']/p/strong"));
+		
+		String welcome = home.getText();
+		
+		System.out.println(welcome);
+
+		if ((welcome.equals("About Application: "))) {
+			
+			System.out.println("User Credentials are  Working");
+		}
+		
 		String afterTitle = driver.getTitle();
 		
 		if (beforeTitle.equals(afterTitle)) {

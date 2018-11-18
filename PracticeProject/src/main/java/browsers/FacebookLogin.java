@@ -26,7 +26,6 @@ public class FacebookLogin {
 		
 		driver.findElement(By.xpath("//label[contains(text(),'Email or Phone')]/following::input[1]")).sendKeys("skurry189@gmail.com");
 		
-			
 		//driver.findElement(By.xpath("//input[@aria-label='Log In'][@value='Log In']")).click();
 
 	}
