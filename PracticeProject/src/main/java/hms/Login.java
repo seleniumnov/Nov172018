@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import generalTestCase.GetValues;
+
 public class Login {
 
 	public static void main(String[] args) {
@@ -30,8 +32,9 @@ public class Login {
 		String welcome = home.getText();
 		
 		System.out.println(welcome);
+		
 
-		if ((welcome.equals("About Application: "))) {
+		if ((welcome.equals(GetValues.getValue("hms.home")))) {
 			
 			System.out.println("User Credentials are  Working");
 		}

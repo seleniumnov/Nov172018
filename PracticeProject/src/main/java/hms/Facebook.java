@@ -1,8 +1,10 @@
 package hms;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
+
+import webpages.FBHomePage;
 
 public class Facebook {
 
@@ -14,11 +16,10 @@ public class Facebook {
 		driver.manage().window().maximize();
 		driver.get("https://facebook.com");
 		
-		driver.findElement(By.name("firstname")).clear();
+		FBHomePage home = PageFactory.initElements(driver, FBHomePage.class);
 		
-		driver.findElement(By.name("firstname")).sendKeys("Selenium");
-		
-		driver.findElement(By.name("sex")).click();
+		home.userName.sendKeys("Selenium");
+		home.passWord.click();
 		
 	}
 

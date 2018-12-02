@@ -11,8 +11,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 
-public class Login {
+import webpages.HomePage;
+
+public class CrmLogin {
 
 	public static void main(String[] args) throws Exception {
 		
@@ -23,11 +26,11 @@ public class Login {
 		Thread.sleep(3000);
 		driver.manage().window().maximize();
 		
-		driver.findElement(By.name("username")).sendKeys("jagadeesh232708");
+		HomePage home = PageFactory.initElements(driver, HomePage.class);
 		
-		driver.findElement(By.name("password")).sendKeys("jagadeeshjaggu");
-		
-		driver.findElement(By.xpath("//input[@value='Login']")).click();
+		home.userName.sendKeys("jagadeesh232708");
+		home.passWord.sendKeys("jagadeeshjaggu");
+		home.login.click();
 		
 		driver.switchTo().frame(driver.findElement(By.xpath("//frame[@name='mainpanel']")));
 		
