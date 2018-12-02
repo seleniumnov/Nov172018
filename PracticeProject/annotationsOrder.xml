@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TesgNG">
+  <test thread-count="5" name="Annotations">
+    <classes>
+      <class name="testNG.ExecutionOrder">
+      	<methods>
+      		<include name="demoCase"></include>
+      	</methods>
+      </class>
+    </classes>
+  </test> <!-- Annotations -->
+</suite> <!-- TesgNG -->

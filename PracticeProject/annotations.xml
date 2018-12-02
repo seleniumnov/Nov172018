@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IntroTestNG">
+  <test name="Test">
+    <classes>
+      <class name="testNG.annotations">
+      <methods>
+      	<include name="sample"></include>
+      	<exclude name="demo1"></exclude>
+      </methods>
+      </class>
+      <class name="hms.TestNGHMSLogin"></class>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- IntroTestNG -->
