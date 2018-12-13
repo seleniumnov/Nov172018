@@ -13,62 +13,71 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import webpages.AmazonCategoryPage;
+import webpages.HomePage;
+
 public class AmazonTC1 {
-	 WebDriver driver;
-	 public void capturescreenshot() {
-			try {
-				LocalDateTime today=LocalDateTime.now();
-				DateTimeFormatter cur=DateTimeFormatter.ofPattern("ddmmyyhhmmss");
-				String time=cur.format(today);
-				File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); 
-				FileHandler.copy(src, new File("./screenshots/"+time+".png"));
-			
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+	WebDriver driver;
+
+	public void capturescreenshot() {
+		try {
+			LocalDateTime today = LocalDateTime.now();
+			DateTimeFormatter cur = DateTimeFormatter.ofPattern("ddmmyyhhmmss");
+			String time = cur.format(today);
+			File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			FileHandler.copy(src, new File("./ScreenShots/" + time + ".png"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	 @BeforeMethod
-   public void init() {
-	   System.setProperty("webdriver.chrome.driver", "C:\\Anil\\drivers\\chromedriver.exe");
-	    driver=new ChromeDriver();
+	}
+
+	@BeforeMethod(alwaysRun=true)
+	public void init() {
+		System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\chromedriver.exe");
+		driver = new ChromeDriver();
 		driver.get("https://www.amazon.in");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-	   
-   }
-   @Test
-   public void category() {
-	   try {
-		    
-		    Thread.sleep(2000);
-			WebElement mo1=driver.findElement(By.xpath("//a[@id='nav-link-shopall']"));
-			Actions action1=new Actions(driver);
-			action1.moveToElement(mo1).build().perform();
+
+	}
+
+	@Test(groups="Smoke",alwaysRun=true)
+	public void category() {
+		
+		AmazonCategoryPage category = PageFactory.initElements(driver, AmazonCategoryPage.class);
+		HomePage home = PageFactory.initElements(driver, HomePage.class);
+		
+		try {
+
+			Thread.sleep(2000);
+			//WebElement mo1 = driver.findElement(By.xpath("//a[@id='nav-link-shopall']"));
+			Actions action1 = new Actions(driver);
+			action1.moveToElement(category.topMenuShopAll).build().perform();
 			capturescreenshot();
 			Thread.sleep(2000);
-			WebElement mo2=driver.findElement(By.xpath("//span[text()='TV, Appliances, Electronics']"));
-			Actions action2=new Actions(driver);
-			action2.moveToElement(mo2).build().perform();
+			//WebElement mo2 = driver.findElement(By.xpath("//span[text()='TV, Appliances, Electronics']"));
+			Actions action2 = new Actions(driver);
+			action2.moveToElement(category.mo2).build().perform();
 			capturescreenshot();
 			Thread.sleep(2000);
-			List<WebElement> links=driver.findElements(By.xpath("(//img[@class='nav-promo'])[6]/following::div[2]/a/span"));
-			System.out.println(links.size());
-			for(WebElement link:links) {
+			
+			for (WebElement link : category.links) {
 				System.out.println(link.getText());
-				if(link.getText().equalsIgnoreCase("Cameras")) {
+				if (link.getText().equalsIgnoreCase("Cameras")) {
 					link.click();
 					break;
 				}
-				
+
 			}
-	} catch (Exception e) {
-		e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-	   
-   }
-	
-	
+
 }

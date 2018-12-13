@@ -1,29 +1,23 @@
 package testNG;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.text.DateFormatter;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import webpages.AmazonTestCase4;
 
 public class Amazon {
@@ -52,10 +46,31 @@ public class Amazon {
 		
 	}
 	
+	public void getBrowser(String browserName) {
+		
+		switch (browserName) {
+		
+		case "chrome":
+			System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\chromedriver.exe");
+			driver=new ChromeDriver();
+			break;
+		case "firefox":
+			WebDriverManager.firefoxdriver().setup();
+			break;
+		case "ie":
+			WebDriverManager.iedriver().setup();
+			break;
+		default:
+			System.out.println("Please select valid browser name");
+			break;
+		}
+		
+	}
+	
 	@BeforeClass
-	public void init() {
-		System.setProperty("webdriver.chrome.driver", "D:\\Softwares\\chromedriver.exe");
-		driver=new ChromeDriver();
+	@Parameters("browser")
+	public void init(String name) {
+		getBrowser(name);
 		driver.manage().window().maximize();
 		driver.get("https://www.amazon.in");
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
